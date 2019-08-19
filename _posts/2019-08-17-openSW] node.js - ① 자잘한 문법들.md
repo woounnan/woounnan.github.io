@@ -1,4 +1,4 @@
-## 자잘한 문법
+# 자잘한 문법
 
 1. 백틱(``)
 
@@ -14,6 +14,8 @@
      const d = `${a}는 ${b}는 ${c}` // '', ""는 불가능
      ```
 
+   ----
+
    
 
 2. 리터럴
@@ -21,6 +23,8 @@
    - 대괄호로 <u>객체를 한 번에</u> 정의
    - <u>존재하지 않는 객체 멤버값</u>을 정의
    - 최신 js에서는 선언하는 방법이 약간 변경됨
+
+   ----
 
    
 
@@ -30,7 +34,9 @@
 
      ` const add3 = (x, y) => x + y;`
 
-     
+   ----
+
+   
 
 4. 비구조화 할당
 
@@ -72,7 +78,10 @@
 
        2. `const { status, getCandy, a, b} = candyMachine //a, b란 멤버는 없으므로 undefine 됨`
 
-       
+
+   ----
+
+   
 
 5. 가변인자 설정
 
@@ -95,7 +104,38 @@
      (3) [2, 3, 4]
      ```
 
+
+   ----
+
+   
+
+6. 파일 간 데이터 공유
+
+   - 공유할 데이터 export
+
+     ```js
+     //ex.js
+     var greet = function(){
+     	console.log('Hello! Im function in ex.js');
+     }
      
+     module.exports = greet
+     ```
 
+   - 공유받을 데이터 import
 
+     ```js
+     var recvFunc = require('./ex.js');
+     recvFunc();
+     ```
 
+     ​	*※함수가 아닌 상수, 변수도 가능※*
+
+   -----
+
+   
+
+7. console 객체
+
+   - console.trace
+     - 콜스택 trace 해줌
