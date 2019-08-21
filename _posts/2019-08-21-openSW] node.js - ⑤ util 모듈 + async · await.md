@@ -66,12 +66,16 @@
       });
       ```
 
+      ---
+
     - promisify 사용
 
       ```js
       const randomBytesPromise = util.promisify(crypto.randomBytes);
       const pbkdf2Promise = util.promisify(crypto.pbkdf2);
       ```
+
+      ---
 
     - then / catch 형식으로 작성
 
@@ -89,6 +93,8 @@
         })
       ```
 
+      ---
+
     - async / await 형식으로 작성
 
       ```js
@@ -101,4 +107,3 @@
       ```
 
       
-
