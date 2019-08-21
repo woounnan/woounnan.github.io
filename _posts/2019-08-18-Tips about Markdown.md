@@ -6,6 +6,8 @@
 <span style="color:blue"> 내용 </span>
 ```
 
+----------
+
 
 
 - 그래프 삽입
@@ -22,6 +24,8 @@
   4. markdown에서 그래프 삽입
      - 참고 : [typora guide](https://support.typora.io/Draw-Diagrams-With-Markdown/)
 
+--------
+
 
 
 - insert the graph in github pages
@@ -30,3 +34,6 @@
   2. 미리보기 이미지를 다운받아서 포스팅 글에 첨부
   
      ​	![merEdit](/img/merEdit.png)
+
+--------
+
