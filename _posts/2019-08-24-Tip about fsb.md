@@ -2,7 +2,7 @@
 
 - 64bit Calling convention
 
-  ![fsb-cv](C:\Users\Administrator\Downloads\woounnan.github.io\img\fsb-cv.png )
+  ![fsb-cv](/img/fsb-cv.png )
 
   - 7번째 인자부터 스택에 저장되므로 스택값을 확인할 때 `%7$lx`처럼 **7부터 카운트**를 해줘야 한다.
   
