@@ -66,6 +66,8 @@ published : false
 
     ​	*이를 이용하자*
 
+----------
+
 
 
 #### 반환 방식
@@ -84,11 +86,11 @@ published : false
 
   2. direct 주소 수정
 
-     코드를 확인한 결과, `size`를 대입하여 이 위치를 계산할 수 없어서 불가능하다.
+     코드를 확인한 결과, 진행되는 `esp` 연산으로 이 위치의 값으로 조작하는 것은 불가능하다.
 
 ![return2](C:\Users\Administrator\Downloads\woounnan.github.io\img\alloca\return2.png)
 
-
+-------
 
 #### size 계산
 
@@ -100,16 +102,23 @@ published : false
 
   가 되도록 스택을 계산해야 한다.
 
-  *하지만*
+- `check_canary` 까지 `esp`값의 계산과정을 보면
 
-  계산할 필요가 없다.
+  ![calc](img\alloca\calc.PNG)
 
-  `ebp-0x14`를 대입하는 코드에 `bp`를 걸고, `ebp-0x14` 스택의 값을 확인한 뒤
-
-  덮어써야할 `ebp-4`의 스택값의 차이를 구하면 된다.
-
-- 결과적으로
-
-  **
-
+  1. alloca
+     - size + 34  한 값에 0x10을 나눠준 결과를 esp와 더한다.
+  2. More operations... (from alloca to check_canary )
+     - esp가 몇번 push, add된다.
+     - 이것은 몰라도 된다
   
+- *계산할 필요가 없다!*
+
+  `check_canary` 내에 bp를 걸고 `ebp-0x14`의 값을 확인한 뒤
+
+  마지막 `main`함수 끝에서 조작하려는 스택값(`ebp-4`)를 확인하여
+
+  이 둘의 차를 계산하면 되겠다.
+
+- 결과적으로 `-67`~`-82`사이의 값이
+
