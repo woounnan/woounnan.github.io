@@ -20,4 +20,18 @@
 
     - import Work ... 로 선언하자
 
-      
+
+
+
+# 19.10.02
+
+- modal로 창 띄움
+- db/work 구현
+  - 단순히 파일저장용도
+  - sender인 Work.vue에서 파일과, works(title, contents, date 등)를 설정하여 db/work로 요청
+  - db/work는 파일을 저장한 뒤, saveName과 realName을 works에 포함시켜서 응답
+  - Work.vue는 받은 works를 bus emit(work)로 BasicChat.vue에 전달 
+  - BasicChat.vue는 bus on(work)로 works를 수신하여 일반적인 msg와 동일하게 처리
+    - 주의할 점은, receiver가 배열(여러명 가능)이므로, 각 수신자에게 동일한 메시지 처리를 해야한다.
+- 큰일남.. multer 오류남.
+  - 다음에 할 때, multer 기본 파일 수신 코드로 바꾼뒤 테스트해야함 하..
