@@ -33,7 +33,7 @@
   - Work.vue는 받은 works를 bus emit(work)로 BasicChat.vue에 전달 
   - BasicChat.vue는 bus on(work)로 works를 수신하여 일반적인 msg와 동일하게 처리
     - 주의할 점은, receiver가 배열(여러명 가능)이므로, 각 수신자에게 동일한 메시지 처리를 해야한다.
-- 큰일남.. multer 오류남.
+- 큰일남.. multer 오류남. 
   - 다음에 할 때, multer 기본 파일 수신 코드로 바꾼뒤 테스트해야함 하..
 
 
@@ -137,3 +137,28 @@
 - 파일 다운로드 링크 해야함!
 
 - 일반 메시지 보내는데 works로 인식되는거 해결해야함.. ㅡㅡ
+
+
+
+# 10.06
+
+- 부서에게 전송 구현
+
+- 일반메시지 works로 인식되는거 해결
+
+  - `flag_expired`가 default 설정되있어서, 일반메시지에 works를 설정안했는데도 DB에 저장시
+
+    works가 생긴 상태로 저장되서 그랫던 것.
+
+    - default를 삭제시키고, work 등록시 `flag_expired` 설정해주도록 만들어서 해결
+
+- tabs 기본 틀 구현
+
+  - 남은 것
+    - UI 다듬기(즐겨찾기, contents, 남은 시간, 상태 표시 등)
+    - `getWorks` 에서 받아온거 출력시키기
+    - 동적인 기능 만들기(클릭시 나오는 창, 즐겨찾기 등)
+
+- `flag_expired` 삭제
+  - 시간 지났다는건 front에서 시간값 비교해서 즉시 확인하는게 맞네.
+  - 
