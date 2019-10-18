@@ -265,6 +265,7 @@
 
 - 현재 문제
   - 제출을 해도 상태가 안바뀐다
+    
     - 기존의 work를 못찾아서 상태가 안바뀌는것 같다.
     
   - signal work는 BasicChat을 한번 열어야지 on이 된다.
@@ -298,3 +299,263 @@
   - 알림 구현
   
   - 당직관리 구현
+
+
+
+# 10.14
+
+- windows에서 npm install로 한번에 세팅이 안된다
+  - vue cli가 없다고 나옴(설치해도)
+  - 새로 vue create 해야지 front가 동작함
+- 그냥 새로 해야된다,.. 하
+
+
+
+
+
+# 10.15
+
+### 설치할 것
+
+- 
+
+ 
+
+### 세팅
+
+1. express 설치
+
+   ```shell
+   npm i express-generator -g
+   express --view=pug be
+   cd be
+   npm i
+   npm start 
+   ```
+
+2. vuetify 설치
+
+   ```shell
+   yarn global add @vue/cli
+   vue --version
+   vue create front
+   cd front
+   npm install
+   vue add vuetify
+   ```
+
+3. 기본 화면에서 필요없는 것 지우기
+
+4. Login.vue 추가
+
+   - router.js
+
+     - Login.vue 라우트 추가
+
+   - App.vue
+
+     - 로그인/로그아웃 네비게이션 추가
+     - 페이지 네비게이션 추가
+
+   - Login.vue
+
+     - public/index.html
+
+       -  material icon 추가
+
+         ```html
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         ```
+
+         
+
+     - Login.vue
+
+       - 등록 버튼 추가
+
+       - 로그인 기능 추가
+
+         - axios 설치 - be, fe
+
+           - cors 설치 - be
+
+             ```
+  yarn add cors
+             ```
+           
+             
+   
+           - cors 선언
+           
+             ```js
+             //app.js
+             const cors = require('cors') // 상단 아무곳이나 추가
+            
+             app.use(cors()) // api 위에서 사용하겠다고 선언
+             ```
+- axios 로그인 요청처리 구현
+  
+           - 코드에 따른 경고창 출력
+           - 받아온 tk storage에 저장
+           - store.js user정보 초기화
+           - initOthers
+       
+         - apis/db/index.js 로그인 응답 구현
+         
+           - mongoose 설치
+           
+             ```shell
+             yarn add mongoose
+             
+             //app.js
+             const mongoose = require('mongoose')
+             
+             mongoose.connect('mongodb://localhost:27017/myDB', { useNewUrlParser: true }, (err) => {
+                if (err) return console.error(err)
+                console.log('mongoose connected!')
+             })
+             ```
+           
+           - model user, company 구현
+           
+           - ` getUser` 구현
+           
+             - 토큰 생성
+           
+               - jwt 설치 - be
+           
+                 ```JS
+                 npm i jsonwebtoken --save
+                 ```
+           
+             - user 정보 리턴
+           
+               ```js
+               router.post('/login', (req, res, next) => {
+               	var id = req.body.id
+               	var password = req.body.password
+               	User.findOne({id: id}, (e, r) =>{
+               		if(!e){
+               			if(!r){
+               				return res.send({code: -1})
+               			}
+               			else{
+               				//token 생성
+               				var key = r.key
+               				jwt.sign({id, password}, key, (e, token) =>{
+               					if(e){
+               						return res.send({code: -1, msg: 'error on token'})
+               					}
+               					return res.send({code: 1, token: token, user: r})
+               				})				
+               			}
+               		}
+               		else{
+               			console.error('error occurred ::: db ::: getUser', e)
+               			return res.send({code: -1})
+             		}
+             	})
+             })
+             ```
+         
+       
+- Register.vue
+
+     - modal 설치
+
+          - npm
+
+               ```
+               npm install vue-js-modal --save
+               ```
+
+          - main.js
+
+               ```js
+               import VModal from 'vue-js-modal'
+               
+               Vue.use(VModal, { dynamic: true })
+               ```
+
+     - 입력폼 구현
+
+     - 검색기능 구현
+       - 회사
+       - 부서
+
+- Login.vue
+
+     - initCompany
+
+     - 로그인 요청 및 결과에 따른 응답
+
+          - 실패시
+
+               - 경고창 출력
+
+          - 로그인 성공시
+
+               - 초기화
+
+                    - 회사의 모든 부서
+
+                    - Others
+
+                    - 소켓
+
+                         - 소켓 io 설치
+
+                              ```shell
+                              npm install --save socket.io-client vue-socket.io
+                              ```
+
+                         - 선언
+
+                              ```js
+                              import VueSocketIO from 'vue-socket.io'
+                              import io from 'socket.io-client'
+                              ```
+
+                    - 토큰
+
+               - 페이지 이동
+
+- router.js
+
+     - navigation guard
+
+          ```js
+          
+          const requireAuth = (to, from, next) =>{
+            if(!store.state.token)
+                    next('/login')
+            console.log('token: '+store.state.token)
+            next()
+          } 
+          
+          {
+           ...
+           beforeEnter: requireAuth
+          }
+          
+          ```
+
+- Home.vue
+
+     - Preview.vue 보여주기
+     - List.vue 보여주기
+     - Bar.vue 보여주기
+
+- List.vue
+
+     - 유저목록 출력
+
+     - 유저 클릭시 대화하기
+
+          - BasicChat 설치
+
+               ```shell
+               yarn add basic-vue-chat
+               ```
+
+               
