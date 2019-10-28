@@ -380,7 +380,7 @@
            - cors 설치 - be
 
              ```
-  yarn add cors
+    yarn add cors
              ```
            
              
@@ -453,11 +453,13 @@
                		else{
                			console.error('error occurred ::: db ::: getUser', e)
                			return res.send({code: -1})
-             		}
-             	})
-             })
+               	}
+               })
+               })
+               ```
              ```
-         
+             
+             ```
        
 - Register.vue
 
@@ -559,3 +561,4 @@
                ```
 
                
+
