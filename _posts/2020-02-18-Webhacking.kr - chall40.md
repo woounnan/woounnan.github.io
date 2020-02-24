@@ -22,7 +22,6 @@
 
 - admin으로 로그인시 password를 입력하는 페이지가 나온다.
 
-  - 테이블, 컬럼 이름을 알아내서 패스워드값을 추출하자
 
 - 새롭게 알게된 efficient sql injection 방식으로 코딩했다.
 
